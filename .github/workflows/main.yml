@@ -17,7 +17,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - run: pip install ics bs4
+      - run: pip install ics bs4 requests
       - run: python ./.scripts/gen_ical_gpt.py
       
       # commit updated schedule.
