@@ -1,0 +1,25 @@
+on:
+  schedule:
+    - cron: '0 8 * * *'
+  push: 
+    branches: 
+      - main
+
+jobs:
+  test_schedule:
+    runs-on: ubuntu-latest
+    permissions:
+          # Give the default GITHUB_TOKEN write permission to commit and push the
+          # added or changed files to the repository.
+          contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.9'
+          cache: 'pip' # caching pip dependencies
+      - run: pip install ics
+      - run: python ./scripts/gen_ical_gpt.py
+      
+      # commit updated schedule.
+      - uses: stefanzweifel/git-auto-commit-action@v5
