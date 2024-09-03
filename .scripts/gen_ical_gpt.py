@@ -33,6 +33,9 @@ for row in rows:
     match_details = columns[2].get_text(strip=True)
     venue = columns[5].get_text(strip=True)
 
+    if "Marieberg" not in match_details: 
+        continue
+
     # Parse date and time
     try:
         event_datetime = datetime.strptime(date_str, "%Y-%m-%d %H:%M")
